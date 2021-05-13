@@ -8,6 +8,8 @@ namespace MusicOrganizer.Models
 
     public string Artist { get; set; }
 
+    public int Id { get; }
+
     private static List<Music> _instances = new List<Music> { };
 
     // public Music(string title)
@@ -27,6 +29,7 @@ namespace MusicOrganizer.Models
     {
       Title = title;
       _instances.Add(this);
+      Id = _instances.Count;
 
     }
 
@@ -44,6 +47,11 @@ namespace MusicOrganizer.Models
     public static void ClearAll()
     {
       _instances.Clear();
+    }
+
+    public static Music Find(int searchId)
+    {
+      return _instances[searchId - 1];
     }
 
 

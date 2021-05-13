@@ -1,0 +1,9 @@
+@using MusicOrganizer.Models;
+<h1>All Your Music</h1>
+
+<ul>
+  @foreach (Music music in Music.GetAll())
+  {
+    <li><a href='/music/@music.Id'>@music.Title</a></li>
+  }
+</ul>
