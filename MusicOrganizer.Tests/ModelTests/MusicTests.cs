@@ -6,22 +6,39 @@ using System;
 namespace MusicOrganizer.Tests
 {
   [TestClass]
-  public class MusicTests
+  public class MusicTests : IDisposable
   {
+
+    private static string _titleString = "Purple Rain";
+    private Music _newMusic = new Music(_titleString);
+
+    public void Dispose()
+    {
+      Music.ClearAll();
+    }
+
     [TestMethod]
     public void Music_CreatesInstanceOfMusicObject_Music()
     {
-      string newTitle = "Purple Rain";
-      Music newRecord = new Music(newTitle);
-      Assert.AreEqual(typeof(Music), newRecord.GetType());
+      _titleString = "Purple Rain";
+      _newMusic = new Music(_titleString);
+      Assert.AreEqual(typeof(Music), _newMusic.GetType());
     }
 
     [TestMethod]
     public void Music_AssignTitleToMusicObject_String()
     {
-      string newTitle = "Purple Rain";
-      Music newRecord = new Music(newTitle);
-      Assert.AreEqual(newTitle, newRecord.Title);
+      _titleString = "Purple Rain";
+      _newMusic = new Music(_titleString);
+      Assert.AreEqual(_titleString, _newMusic.Title);
+    }
+
+    [TestMethod]
+    public void Music_AddMusicToList_List()
+    {
+
+      List<Music> newList = new List<Music> { _newMusic };
+      CollectionAssert.AreEqual(newList, Music.GetAll());
     }
   }
 }
