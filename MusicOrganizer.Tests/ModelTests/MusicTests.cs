@@ -10,6 +10,7 @@ namespace MusicOrganizer.Tests
   {
 
     private static string _titleString = "Purple Rain";
+    private static string _artist = "Prince";
     private Music _newMusic = new Music(_titleString);
 
     public void Dispose()
@@ -23,6 +24,18 @@ namespace MusicOrganizer.Tests
       _titleString = "Purple Rain";
       _newMusic = new Music(_titleString);
       Assert.AreEqual(typeof(Music), _newMusic.GetType());
+    }
+
+    [TestMethod]
+    public void Music_CreatesInstanceOfMusicObjectWithTitleAndArtist_MusicWithTileAndArtist()
+    {
+      string title = _titleString;
+      string artist = _artist;
+      string[] resultArray = { title, artist };
+      _newMusic = new Music(_titleString, _artist);
+      string[] expectedArray = { _newMusic.Title, _newMusic.Artist };
+
+      CollectionAssert.AreEqual(resultArray, expectedArray);
     }
 
     [TestMethod]
